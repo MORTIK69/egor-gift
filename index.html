@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Призент для Егора 🎁</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: #111;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        .section {
+            min-height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-friends {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        }
+
+        .section-love {
+            background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 45%, #f472b6 100%);
+        }
+
+        .section::before,
+        .section::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .section-friends::before {
+            width: 400px; height: 400px;
+            background: #93c5fd;
+            top: -150px; left: -150px;
+        }
+        .section-friends::after {
+            width: 350px; height: 350px;
+            background: #1e40af;
+            bottom: -120px; right: -120px;
+        }
+        .section-love::before {
+            width: 400px; height: 400px;
+            background: #fb7185;
+            top: -150px; right: -150px;
+        }
+        .section-love::after {
+            width: 350px; height: 350px;
+            background: #991b1b;
+            bottom: -120px; left: -120px;
+        }
+
+        .section-title {
+            color: #fff;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            max-width: 600px;
+            line-height: 1.5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-block {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 16px;
+            padding: 20px 24px;
+            color: #fff;
+            font-size: 1rem;
+            line-height: 1.6;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            margin: 0 auto 24px;      
+            position: relative;
+            z-index: 2;
+        }
+
+        .text-block p + p {
+            margin-top: 12px;
+        }
+
+        .gallery {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;           
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1 / 1;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+            background: rgba(0,0,0,0.25);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item img.broken {
+            opacity: 0.3;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-dots {
+            position: fixed;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 100;
+        }
+
+        .nav-dots a {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            border: 2px solid rgba(255,255,255,0.7);
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .nav-dots a:hover {
+            transform: scale(1.35);
+            background: rgba(255,255,255,0.9);
+        }
+
+        .nav-dots a.active {
+            background: #fff;
+            transform: scale(1.4);
+            box-shadow: 0 0 12px rgba(255,255,255,0.8);
+        }
+
+        @media (max-width: 700px) {
+            .section { padding: 40px 16px; }
+            .section-title { font-size: 2rem; }
+            .section-subtitle { font-size: 0.9rem; }
+            .text-block { padding: 16px 18px; font-size: 0.95rem; }
+            .gallery { gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-dots">
+        <a href="#friends" title="Друзья"></a>
+        <a href="#love"    title="Любимая"></a>
+    </div>
+
+    <section class="section section-friends" id="friends">
+
+        <h1 class="section-title fade-in">💙 Твои шмакодявки</h1>
+        <p class="section-subtitle fade-in">
+            Тута я постарался собрать частички нашей жизни чтобы ты помнил
+        </p>
+
+        <div class="text-block fade-in">
+            <p>
+                Егор я хочу чтобы ты помнил обо всех нас и когда тебе трудно тяжело заходил сюда с вспоминал с кем ты прошел через трудности , незабывай о нас ,мы всегда помним что в цимле нас ждет 1 разрывной веселый добрый барень по имени Егорка в попе помидорка, не скучай мы всегда находимся в твоем сердце так далеко и так близко , мы всегда с тобой и за тебя! А еще хочу пожелать тебе что бы ты достиг всего и 
+            </p>
+        </div>
+
+        <div class="gallery fade-in">
+            <div class="gallery-item">
+                <img src="photos/friends/1.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/friends/2.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/friends/3.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/friends/4.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-love" id="love">
+
+        <h1 class="section-title fade-in">❤️ От Любимой зайки</h1>
+        <p class="section-subtitle fade-in">
+         Уделим время не тока друзям но и частичке твоего серца
+        </p>
+
+        <div class="text-block fade-in">
+            <p>
+Любимый, я безумно рада, что встретила тебя. Хочу сказать тебе спасибо за всё, что ты сделал и делаешь для меня. Ты самый яркий и теплый лучик в моей жизни. Я хочу всегда быть рядом с тобой, неважно в какой ситуации. Люблю тебя безумно сильно и хочу верить в то, что наша любовь навсегда)
+            </p>
+        </div>
+
+        <div class="gallery fade-in">
+            <div class="gallery-item">
+                <img src="photos/love/1.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/love/2.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/love/3.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+            <div class="gallery-item">
+                <img src="photos/love/4.jpg" alt="Фото"
+                     onerror="this.classList.add('broken')">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        const dots = document.querySelectorAll('.nav-dots a');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    dots.forEach(dot => {
+                        dot.classList.toggle('active',
+                            dot.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+
+</body>
+</html>
